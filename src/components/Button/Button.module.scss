@@ -1,0 +1,16 @@
+@import '../../styles/shared.scss';
+
+.button {
+  background-color: $btn-bcg;
+  height: 34px;
+  width: 100px;
+  border-radius: 80px;
+  line-height: 26px;
+  cursor: pointer;
+
+  &:hover,
+  &:focus
+   {
+    background-color: $accent-btn;
+  }
+}

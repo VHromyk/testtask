@@ -1,0 +1,41 @@
+// text
+$text-main-color: rgba(0, 0, 0, 0.87); // the main color for the text
+$text-white-color: #ffffff; // the second color for the text
+
+// button
+$btn-bcg: #f4e041; // background for the buttons
+$accent-btn: #ffe302;
+
+$text-light-theme-color: rgba(24, 28, 39, 0.6); // світло-сірий текст
+$text-dark-theme-color: #ffffff; // білий текст на темному фоні
+$cart-text-color: #000000; // текст на карточках спринтів
+$error-text-color: #ff2c0c; // червоний текст для error-message при введенні неправильного паролю у формах реєстрації та логіну
+$warning-text-color: #a6a6a6;
+
+// border
+// #181C27 10% (border для хедера, лівої панелі зі списком проектів)
+$border-main-color: rgba(24, 28, 39, 0.1);
+// #181C27 20% (border для полів форм реєстрації та логіну)
+$input-field-border-color: rgba(24, 28, 39, 0.2);
+$error-border-color: #ff2c0c; // border для input, коли ввели неправильного пароль
+
+// background
+$page-bcg-color: #f8f8f8; // the main background for the page
+$components-bcg-color: #ffffff; // bacgground for the each card
+$registration-form-bcg-color: #fafafa; // фон форм реєстрації та логіну
+// FFFFFF 70%
+$calendar-bcg-color: rgba(250, 250, 250, 0.7); // напівпрозорий фон календаря
+$backdrop-color: rgba(24, 28, 39, 0.25); // #181C27 25% (бекдроп для модалки);
+$button-hover-bcg-color: #ffffff;
+
+// icons
+$icon-dark-theme-color: #ffffff; // іконки з білим малюнком всередині (на оранжевому фоні)
+$icon-light-theme-color: #a6a6a6; // сірі іконки без фону
+$icon-without-bgc-color: #181c27; // чорні іконки без фону (закривання модалок, стрілки)
+$icon-circle-border-color: #d1d2d4; // іконка закривання модалок створення проекту та створення задачі (хрестик)
+
+// icons background
+$icon-light-theme-bcg-color: #a6a6a6; // для іконок з сірим фоном
+$icon-dark-theme-bcg-color: #ffffff; // фон для іконок корзини на карточках проектів
+
+$accent-color: #ff6b08; // оранжевий акцент

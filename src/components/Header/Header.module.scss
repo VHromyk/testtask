@@ -1,0 +1,30 @@
+@import '../../styles/shared.scss';
+
+.header_wrapper {
+  height: 60px;
+}
+
+.header_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.logo_link {
+  padding-top: 17px;
+  cursor: pointer;
+}
+
+.butto_wrapper {
+  display: flex;
+}
+
+.button_wrapper {
+  padding-top: 13px;
+}
+
+.first_button {
+  margin-right: 10px;
+}
+
