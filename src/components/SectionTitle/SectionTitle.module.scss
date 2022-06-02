@@ -1,0 +1,14 @@
+@import '../../styles/shared.scss';
+
+.title {
+ padding-top: 140px;
+ font-size: 40px;
+ line-height: 1;
+ text-align: center;
+}
+
+@media (max-width: 767px) {
+ .title {
+  width: 328px;
+ }
+}

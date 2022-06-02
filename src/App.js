@@ -1,6 +1,7 @@
 import Header from './components/Header/Header'
 import Hero from './components/Hero/Hero'
 import UsersContainer from './components/UsersContainer/UsersContainer';
+import Form from './components/Form/Form';
 
 function App() {
   return (
@@ -8,6 +9,7 @@ function App() {
     <Header />
       <Hero />
       <UsersContainer />
+      <Form />
     </>
   );
 }

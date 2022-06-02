@@ -1,0 +1,98 @@
+@import '../../styles/shared.scss';
+
+.button {
+    background-color: grey;
+}
+
+.form {
+    margin-top: 50px;
+    position: relative;
+}
+
+.input {
+    height: 54px;
+    width: 100%;
+    margin-top: 50px;
+    padding-left: 16px;
+    border: 1px solid #d0cfcf;
+    background: $page-bcg-color;
+    border-radius: 4px;
+
+    &_label {
+        font-size: 12px;
+        line-height: 1.17;
+        color: $text-in-form-color;
+        position: absolute;
+        left: 16px;
+    }
+
+    &::placeholder {
+        font-size: 16px;
+        color: $text-in-form-color;
+    }
+}
+
+.select_section {
+    margin-top: 43px;
+    text-align: start;
+}
+
+.select_title {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.62;
+
+    &_container {
+        margin-top: 11px;
+    }
+
+    &_element {
+        display: inline-block;
+        position: relative;
+        padding: 0 6px;
+        margin: 10px 0 0;
+
+        & input {
+            display: none;
+        }
+
+        & label:before {
+                content: ' ';
+                display: inline-block;
+                position: relative;
+                top: 5px;
+                margin: 0 5px 0 0;
+                width: 24px;
+                height: 24px;
+                border-radius: 13px;
+                border: 2px solid #11a0a9;
+                background-color: transparent;
+            }
+
+            & input:checked+ label:after {
+            border-radius: 10px;
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            top: 9px;
+            left: 10px;
+            content: ' ';
+            display: block;
+            background: #11a0a9;
+        }
+    }
+}
+
+@media (min-width: 360px) {
+    .form {
+        width: 328px;
+    }
+}
+
+@media (min-width: 768px) {
+    .form {
+        width: 380px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
