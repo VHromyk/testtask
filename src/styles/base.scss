@@ -7,7 +7,8 @@ body {
 
   background-color: $page-bcg-color;
   box-sizing: border-box;
-  font-size: 16px;;
+  font-size: 16px;
+  text-align: center;
   color: $text-main-color; // the main color for the text
 }
 
@@ -26,11 +27,6 @@ html {
   //   box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.2) inset;
   border-radius: 10px;
   background: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  background: $accent-color;
 }
 
 ul {
