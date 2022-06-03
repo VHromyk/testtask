@@ -1,14 +1,21 @@
 import style from './UserCard.module.scss'
-import Man from '../../images/png/field.png'
 
-const UserCard = () => {
+const UserCard = ({ user }) => {
+
+    const cutText = (str) => {
+        if (str.length > 30) {
+            return str.slice(0, 27) +'...';
+        }
+        return str;
+    }
+    
  return (
-  <li className={style.card}>
-         <img src={Man} alt="img" width="70px" height='70px' className={style.image} />  
-         <p className={style.name}>Salvador Stewart Flynn Thomas Salva...</p>
-         <p className={style.profession}>Leading specialist of the department o...</p>
-         <p>JeromeKlarkaJeromeKlarka19233623...</p>
-         <p>+38 (098) 278 76 24</p>
+  <li className={style.card} key={user.id}>
+         <img src={user.photo} alt="img" width="70px" height='70px' className={style.image} />  
+         <p className={style.name}>{cutText(user.name)}</p>
+         <p className={style.profession}>{cutText(user.position)}</p>
+         <p>{cutText(user.email)}.</p>
+         <p>{user.phone}</p>
      </li>
  );
 }
