@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-const token = {
-    set(token) {
-        axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+const TokenService = {
+    getToken() {
+        return axios.get(`/token`);
     },
-    unset() {
-        axios.defaults.headers.common.Authorization = '';
+    set(token) {
+        axios.defaults.headers.common['Token'] = token;
     },
 };
 
 
-export default token;
+export default TokenService;

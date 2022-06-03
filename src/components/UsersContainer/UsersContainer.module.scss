@@ -1,7 +1,15 @@
 @import '../../styles/shared.scss';
 
-.cards_wrapper {
- margin-top: 50px;
+.cards_section {
+margin-top: 50px;
+}
+
+.card {
+ width: 328px;
+ border-radius: 10px;
+ padding: 20px;
+ line-height: 26px;
+ background-color: $card-bcg-color;
 }
 
 .button {
@@ -12,9 +20,43 @@
  margin-right: auto;
 }
 
+@media (max-width: 767px) {
+ .card:not(:last-child) {
+  margin-bottom: 20px;
+ }
+}
+
+@media (min-width: 360px) {
+ .card {
+  width: 328px;
+ }
+}
+
 @media (min-width: 768px) {
- .cards_wrapper {
+   .cards_wrapper {
   display: flex;
   flex-wrap: wrap;
+  margin: -8px;
 }
+  
+ .card {
+  width: 344px;
+  margin: 8px;
+ }
+}
+
+@media (min-width: 1024px) {
+  .cards_wrapper {
+    margin: -14px;
+  }
+ .card {
+  width: 282px;
+  margin: 14px;
+ }
+}
+
+@media (min-width: 2560px) {
+  .card {
+  width: 370px;
+ }
 }

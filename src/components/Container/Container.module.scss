@@ -26,3 +26,11 @@
      padding-right: 61px;
   }
 }
+
+@media (min-width: 2560px) {
+  .container {
+     width: 1200px;
+     padding-left: 15px;
+     padding-right: 15px;
+  }
+}

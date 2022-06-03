@@ -28,21 +28,21 @@ const UsersContainer = () => {
         }
        
         ApiService.incrementPage();
-        ApiService.getUsers().then((res) => setUsers([...users, ...res.data.users]))
+        ApiService.getUsers().then((res) => setUsers([...res.data.users, ...users]))
     }
-
-    
-    console.log(users)
-    console.log(countPages);
 
     return (
         <Container>
             <SectionTitle title="Working with GET request" />
+            <div className={style.cards_section}>
             <ul className={style.cards_wrapper}>
                 {users.map((user) => (
-                    <UserCard user={user} />
+                    <li key={user.id} className={style.card}>
+                        <UserCard user={user}/>
+                    </li>
                 ))}
             </ul>
+            </div>
             {showButton && (
                 <Button
                     type="submit"
