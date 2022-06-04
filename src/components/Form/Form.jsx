@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import SectionTitle from '../SectionTitle/SectionTitle';
-import Container from '../Container/Container';
 import Button from '../Button/Button';
 import style from './Form.module.scss';
 import ApiService from '../../service/api-service';
 import TokenService from '../../service/token-service';
 import normalizedStr from '../../utils/normalizedStr';
 import RudioButton from '../RadioButton/RadioButton';
+import SuccessLoger from '../SuccessLoger/SuccessLoger';
 
-const Form = () => {
+const Form = ({fetchUsers}) => {
     const [positions, setPositions] = useState([]);
     const [checkedEl, setCheckedEl] = useState(1);
     const [disableBtn, setDisableBtn] = useState(true);
@@ -16,7 +16,7 @@ const Form = () => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [uploadFile, setUploadFile] = useState(null);
-
+    const [success, setSuccess] = useState(false);
 
     useEffect(() => {
         ApiService.getPositions().then((res) =>
@@ -24,43 +24,75 @@ const Form = () => {
         );
     }, []);
 
-
     useEffect(() => {
-        const disableBtn = !name || !email || !phone || !checkedEl || !uploadFile.name;
+        const disableBtn =
+            !name || !email || !phone || !checkedEl || !uploadFile;
 
         setDisableBtn(disableBtn);
     }, [name, email, phone, checkedEl, uploadFile]);
 
-    // Paбоччая версия
-
     const clearForm = () => {
-        setName('')
-        setEmail('')
-        setPhone('')
-        setUploadFile('')
+        setName('');
+        setEmail('');
+        setPhone('');
+        setUploadFile('');
         setCheckedEl(1);
-    }
+    };
 
     const onSubmitForm = async (e) => {
         e.preventDefault();
 
-         const dataArray = new FormData();
-         dataArray.append('position_id', checkedEl);
-         dataArray.append('name', name);
+        const dataArray = new FormData();
+        dataArray.append('position_id', checkedEl);
+        dataArray.append('name', name);
         dataArray.append('email', email);
         dataArray.append('phone', phone);
         dataArray.append('photo', uploadFile);
 
-        const token = await TokenService.getToken().then(res => res.data.token);
+        const token = await TokenService.getToken().then(
+            (res) => res.data.token
+        );
 
-        TokenService.set(token)
+        TokenService.set(token);
 
-        ApiService.addUsers(dataArray).catch(err => console.log(err)).finally(clearForm());   
+        ApiService.addUsers(dataArray).then(res => {
+            setSuccess(true);
+
+            fetchUsers();
+
+            setTimeout(() => setSuccess(false), 5000);
+        })
+            .catch((err) => console.log(err))
+            .finally(clearForm());
     };
-    
+
+
+    const imageHandler = (e) => {
+        e.preventDefault();
+
+        const filePath = e.target.files[0].name;
+
+        const fileSize = e.target.files[0].size;
+
+        // Validate the input file
+
+        const allowedExtensions = /(\.jpg|\.jpeg)$/i;
+
+        if (fileSize > 5242880) {
+            alert('File must be less than 5Mb');
+            return false;
+        }
+
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Invalid file type');
+            return false;
+        }
+            
+            setUploadFile(e.target.files[0]);
+    };
 
     return (
-        <Container>
+        <>
             <SectionTitle title="Working with POST request" />
             <form className={style.form} onSubmit={onSubmitForm}>
                 <div>
@@ -78,11 +110,12 @@ const Form = () => {
                         type="email"
                         className={style.input}
                         placeholder="Your email"
+                        title={email}
                         value={email}
                         required
                         minLength={2}
                         maxLength={100}
-                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <div>
@@ -93,7 +126,7 @@ const Form = () => {
                             id="phone"
                             placeholder="Your phone"
                             required
-                            pattern="/^[\+]{0,1}380([0-9]{9})$)/"
+                            pattern="[\+]{0,1}380([0-9]{9})$"
                             onChange={(e) => setPhone(e.target.value)}
                         />
                     </div>
@@ -106,9 +139,14 @@ const Form = () => {
                             Select your position
                         </h3>
                         <ul className={style.select_container}>
-                            {positions.map((el) =>
-                                <RudioButton key={el.id} el={el} onCheckHandler={setCheckedEl} checked={checkedEl} />
-                            )}
+                            {positions.map((el) => (
+                                <RudioButton
+                                    key={el.id}
+                                    el={el}
+                                    onCheckHandler={setCheckedEl}
+                                    checked={checkedEl}
+                                />
+                            ))}
                         </ul>
                     </div>
                     <div className={style.select_photo_container}>
@@ -117,7 +155,7 @@ const Form = () => {
                             type="file"
                             id="photo"
                             required
-                            onChange={(e) => setUploadFile(e.target.files[0])}
+                            onChange={imageHandler}
                         />
                         <label htmlFor="photo">
                             <div className={style.upload_container}>
@@ -126,7 +164,7 @@ const Form = () => {
                                 </span>
                                 <span className={style.field}>
                                     {uploadFile
-                                        ? normalizedStr(uploadFile.name, 40)
+                                        ? normalizedStr(uploadFile.name, 33)
                                         : 'Upload your photo'}
                                 </span>
                             </div>
@@ -139,7 +177,8 @@ const Form = () => {
                     />
                 </div>
             </form>
-        </Container>
+            {success && <SuccessLoger />}
+        </>
     );
 };
 

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://frontend-test-assignment-api.abz.agency/api/v1'
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 const ApiService = {
     page: 1,

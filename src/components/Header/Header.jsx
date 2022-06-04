@@ -13,7 +13,7 @@ const Header = () => {
           </a>
                   <ul className={style.button_wrapper}>
             <Button type="button" title="Users" classes={style.first_button}/>
-                      <Button type="button" title="SignUp" />
+                      <Button type="button" title="Sign up" />
                   </ul>
               </div>
           </Container>

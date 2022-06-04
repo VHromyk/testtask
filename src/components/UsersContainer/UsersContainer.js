@@ -5,18 +5,21 @@ import Button from "../Button/Button"
 import SectionTitle from "../SectionTitle/SectionTitle"
 import style from './UsersContainer.module.scss'
 import ApiService from '../../service/api-service';
+import Form from '../Form/Form';
+
 
 const UsersContainer = () => {
     const [users, setUsers] = useState([]);
     const [countPages, setcountPages] = useState(null);
     const [showButton, setShowButton] = useState(true);
-
-    useEffect(() => {
+    
+    const fetchUsers = () => {
         ApiService.getUsers().then((res) => {
             setcountPages(res.data.total_pages);
             setUsers(res.data.users);
-        })
-    }, []);
+        });
+    }
+    useEffect(() => fetchUsers, []);
 
 
     const showMoreHandler = (e) => {
@@ -38,7 +41,7 @@ const UsersContainer = () => {
             <ul className={style.cards_wrapper}>
                 {users.map((user) => (
                     <li key={user.id} className={style.card}>
-                        <UserCard user={user}/>
+                        <UserCard  user={user} />
                     </li>
                 ))}
             </ul>
@@ -51,6 +54,7 @@ const UsersContainer = () => {
                     onClick={showMoreHandler}
                 />
             )}
+            <Form fetchUsers={fetchUsers}/>
         </Container>
     );
 }

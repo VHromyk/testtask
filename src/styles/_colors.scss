@@ -5,28 +5,12 @@ $text-in-form-color: #7e7e7e;
 
 // button
 $btn-bcg: #f4e041; // background for the buttons
+$btn-bcg-ds: #b4b4b4; // background for disable buttons
 $accent-btn: #ffe302;
 
 //background 
 $page-bcg-color: #f8f8f8; // the main background for the page
 $card-bcg-color: #ffffff; // bacgground for the each card
 
-$text-light-theme-color: rgba(24, 28, 39, 0.6); // світло-сірий текст
-$text-dark-theme-color: #ffffff; // білий текст на темному фоні
-$cart-text-color: #000000; // текст на карточках спринтів
-$error-text-color: #ff2c0c; // червоний текст для error-message при введенні неправильного паролю у формах реєстрації та логіну
-$warning-text-color: #a6a6a6;
-
 // border
-// #181C27 10% (border для хедера, лівої панелі зі списком проектів)
-$border-main-color: rgba(24, 28, 39, 0.1);
-// #181C27 20% (border для полів форм реєстрації та логіну)
-$input-field-border-color: rgba(24, 28, 39, 0.2);
-$error-border-color: #ff2c0c; // border для input, коли ввели неправильного пароль
-
-
-$registration-form-bcg-color: #fafafa; // фон форм реєстрації та логіну
-// FFFFFF 70%
-$calendar-bcg-color: rgba(250, 250, 250, 0.7); // напівпрозорий фон календаря
-$backdrop-color: rgba(24, 28, 39, 0.25); // #181C27 25% (бекдроп для модалки);
-$button-hover-bcg-color: #ffffff;
+$input-field-border-color: #d0cfcf; //border input
