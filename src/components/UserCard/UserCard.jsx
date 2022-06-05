@@ -19,8 +19,8 @@ const UserCard = ({ user }) => {
                     errorImg.currentTarget.src = photoCover;
                 }}
             />
-            <p className={style.card_element}>{normalizedStr(name, 34)}</p>
-            <p className={style.card_element}>{normalizedStr(position, 34)}</p>
+            <p className={style.card_element}>{normalizedStr(name, 32)}</p>
+            <p className={style.card_element}>{normalizedStr(position, 32)}</p>
             <p>{normalizedStr(email, 34)}</p>
             <p>{phone}</p>
         </div>
