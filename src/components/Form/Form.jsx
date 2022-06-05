@@ -21,6 +21,12 @@ const Form = ({fetchUsers, logger}) => {
         ApiService.getPositions().then((res) =>
             setPositions(res.data.positions)
         );
+
+          TokenService.getToken().then(
+            (res) => TokenService.set(res.data.token)
+        );
+
+        
     }, []);
 
     useEffect(() => {
@@ -47,12 +53,6 @@ const Form = ({fetchUsers, logger}) => {
         dataArray.append('email', email);
         dataArray.append('phone', phone);
         dataArray.append('photo', uploadFile);
-
-        const token = await TokenService.getToken().then(
-            (res) => res.data.token
-        );
-
-        TokenService.set(token);
 
         ApiService.addUsers(dataArray).then(res => {
             fetchUsers();
