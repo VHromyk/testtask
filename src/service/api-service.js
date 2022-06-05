@@ -22,6 +22,10 @@ const ApiService = {
         return axios.get(`/positions`);
     },
 
+    resetPage() {
+        return this.page = 1;
+    },
+
     getPage() {
         return this.page;
     },

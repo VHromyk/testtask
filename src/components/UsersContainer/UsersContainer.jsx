@@ -15,6 +15,8 @@ const UsersContainer = () => {
     const [showSussessLoger, setShowSuccessLoger] = useState(false);
 
     const fetchUsers = () => {
+        ApiService.resetPage();
+        
         ApiService.getUsers().then((res) => {
             setcountPages(res.data.total_pages);
             setUsers(res.data.users);
