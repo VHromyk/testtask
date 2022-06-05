@@ -32,7 +32,7 @@ const UsersContainer = () => {
         }
        
         ApiService.incrementPage();
-        ApiService.getUsers().then((res) => setUsers([...res.data.users, ...users]))
+        ApiService.getUsers().then((res) => setUsers([...users,...res.data.users]))
     }
 
     return (
