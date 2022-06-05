@@ -44,7 +44,7 @@ const Form = ({ fetchUsers, logger }) => {
         setCheckedEl(1);
     };
 
-    const onSubmitForm = async (e) => {
+    const onSubmitForm = (e) => {
         e.preventDefault();
 
         const dataArray = new FormData();
@@ -55,15 +55,18 @@ const Form = ({ fetchUsers, logger }) => {
         dataArray.append('photo', uploadFile);
 
         ApiService.addUsers(dataArray)
-            .then((res) => {
-                // After added user show first 6 users
-                fetchUsers();
-
-                // After added user show section that user was added
-                logger();
+        .then((res) => {
+            if (res.status === 201) {
+                    // After added user show first 6 users
+                    fetchUsers();
+                    // After added user show section that user was added
+                    logger();
+                }
             })
-            .catch((err) => console.log(err))
+            .catch((error) => console.error(error))
             .finally(() => clearForm());
+
+
     };
 
     const imageHandler = (e) => {
@@ -72,8 +75,6 @@ const Form = ({ fetchUsers, logger }) => {
         const filePath = e.target.files[0].name;
 
         const fileSize = e.target.files[0].size;
-
-        console.log(e.target.files[0]);
 
         // Validate the input file
 
@@ -93,7 +94,7 @@ const Form = ({ fetchUsers, logger }) => {
 
         setUploadFile(e.target.files[0]);
     };
-    
+
     // If I have true I will catch an error
     const errorTextInput = name.length >= 2 && name.length <= 60;
     const errorEmailInput = email.length >= 2 && email.length <= 60;
@@ -120,11 +121,11 @@ const Form = ({ fetchUsers, logger }) => {
                             }}
                         />
                     </div>
-                        <label htmlFor="name" className={style.input_label}>
-                            {name.length !== 0 && !errorTextInput && (
-                                <span className={style.helper_eror}>error</span>
-                            )}
-                        </label>
+                    <label htmlFor="name" className={style.input_label}>
+                        {name.length !== 0 && !errorTextInput && (
+                            <span className={style.helper_eror}>error</span>
+                        )}
+                    </label>
                     <div>
                         <TextField
                             required
