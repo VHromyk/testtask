@@ -6,8 +6,9 @@ import ApiService from '../../service/api-service';
 import TokenService from '../../service/token-service';
 import normalizedStr from '../../utils/normalizedStr';
 import RudioButton from '../RadioButton/RadioButton';
+import TextField from '@mui/material/TextField';
 
-const Form = ({fetchUsers, logger}) => {
+const Form = ({ fetchUsers, logger }) => {
     const [positions, setPositions] = useState([]);
     const [checkedEl, setCheckedEl] = useState(1);
     const [disableBtn, setDisableBtn] = useState(true);
@@ -16,16 +17,15 @@ const Form = ({fetchUsers, logger}) => {
     const [phone, setPhone] = useState('');
     const [uploadFile, setUploadFile] = useState(null);
 
-
     useEffect(() => {
         ApiService.getPositions().then((res) =>
             setPositions(res.data.positions)
         );
 
-          TokenService.getToken().then(
-            (res) => TokenService.set(res.data.token)
-        );
+        TokenService.getToken().then((res) => TokenService.set(res.data.token));
     }, []);
+
+    // Make button disable
 
     useEffect(() => {
         const disableBtn =
@@ -33,6 +33,8 @@ const Form = ({fetchUsers, logger}) => {
 
         setDisableBtn(disableBtn);
     }, [name, email, phone, checkedEl, uploadFile]);
+
+    // Clear form after post request
 
     const clearForm = () => {
         setName('');
@@ -52,15 +54,17 @@ const Form = ({fetchUsers, logger}) => {
         dataArray.append('phone', phone);
         dataArray.append('photo', uploadFile);
 
-        ApiService.addUsers(dataArray).then(res => {
-            fetchUsers();
+        ApiService.addUsers(dataArray)
+            .then((res) => {
+                // After added user show first 6 users
+                fetchUsers();
 
-            logger();
-
-        }).catch((err) => console.log(err))
+                // After added user show section that user was added
+                logger();
+            })
+            .catch((err) => console.log(err))
             .finally(() => clearForm());
     };
-
 
     const imageHandler = (e) => {
         e.preventDefault();
@@ -69,9 +73,13 @@ const Form = ({fetchUsers, logger}) => {
 
         const fileSize = e.target.files[0].size;
 
+        console.log(e.target.files[0]);
+
         // Validate the input file
 
         const allowedExtensions = /(\.jpg|\.jpeg)$/i;
+
+        // Check size of file
 
         if (fileSize > 5242880) {
             alert('File must be less than 5Mb');
@@ -79,56 +87,67 @@ const Form = ({fetchUsers, logger}) => {
         }
 
         if (!allowedExtensions.exec(filePath)) {
-            alert('Invalid file type');
+            alert('Invalid file type. Your file should be jpg/jpeg image');
             return false;
         }
-            
-            setUploadFile(e.target.files[0]);
+
+        setUploadFile(e.target.files[0]);
     };
+    
+    // If I have true I will catch an error
+    const errorTextInput = name.length >= 2 && name.length <= 60;
+    const errorEmailInput = email.length >= 2 && email.length <= 60;
 
     return (
         <>
             <SectionTitle title="Working with POST request" />
             <form className={style.form} onSubmit={onSubmitForm}>
-                <div>
-                    <input
+                <div className={style.input_container}>
+                    <TextField
                         type="text"
-                        className={style.input}
+                        required
+                        fullWidth
                         value={name}
-                        placeholder="Your name"
-                        required
-                        minLength={2}
-                        maxLength={60}
+                        id="name"
+                        label="Your name"
+                        variant="outlined"
                         onChange={(e) => setName(e.target.value)}
+                        error={name.length !== 0 && !errorTextInput}
+                        inputProps={{
+                            minLength: 2,
+                            maxLength: 60,
+                        }}
                     />
-                    <input
-                        type="email"
-                        className={style.input}
-                        placeholder="Your email"
-                        title={email}
-                        value={email}
+                    <TextField
                         required
-                        minLength={2}
-                        maxLength={100}
-                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        fullWidth
+                        value={email}
+                        id="email"
+                        label="Your email"
                         onChange={(e) => setEmail(e.target.value)}
+                        error={email.length !== 0 && !errorEmailInput}
+                        inputProps={{
+                            minLength: 2,
+                            maxLength: 60,
+                            pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$',
+                        }}
                     />
                     <div>
-                        <input
-                            type="tel"
-                            className={style.input}
+                        <TextField
+                            required
+                            fullWidth
                             value={phone}
                             id="phone"
-                            placeholder="Your phone"
-                            required
-                            pattern="[\+]{0,1}380([0-9]{9})$"
+                            label="Your phone"
                             onChange={(e) => setPhone(e.target.value)}
+                            inputProps={{
+                                pattern: '[+]{0,1}380([0-9]{9})$',
+                            }}
                         />
                     </div>
                     <label htmlFor="phone" className={style.input_label}>
                         +38 (XXX) XXX - XX - XX
                     </label>
-
                     <div className={style.select_section}>
                         <h3 className={style.select_title}>
                             Select your position

@@ -25,30 +25,21 @@
     padding-bottom: 40px;
 }
 
-.input {
-    height: 54px;
-    width: 100%;
-    padding-left: 16px;
-    border: 1px solid $input-field-border-color;
-    background: $page-bcg-color;
-    border-radius: 4px;
-
-    &_label {
-        font-size: 12px;
-        line-height: 1.17;
-        color: $text-in-form-color;
-        position: absolute;
-        left: 16px;
-    }
-
-    &::placeholder {
-        font-size: 16px;
-        color: $text-in-form-color;
-    }
+.input_container > div:not(:first-child) {
+    margin-top: 40px;
 }
 
-.input:not(:last-child) {
-    margin-bottom: 50px;
+.input_label {
+    font-size: 12px;
+    line-height: 1.17;
+    color: $text-in-form-color;
+    position: absolute;
+    left: 16px;
+}
+
+.input::placeholder {
+    font-size: 16px;
+    color: $text-in-form-color;
 }
 
 .select_section {
