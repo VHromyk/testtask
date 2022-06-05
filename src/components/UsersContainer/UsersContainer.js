@@ -19,7 +19,8 @@ const UsersContainer = () => {
             setUsers(res.data.users);
         });
     }
-    useEffect(() => fetchUsers, []);
+
+    useEffect(() => fetchUsers(), []);
 
 
     const showMoreHandler = (e) => {
