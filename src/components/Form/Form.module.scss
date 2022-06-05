@@ -107,6 +107,10 @@
     align-items: center;
 }
 
+.helper_eror {
+    color: $error-color;
+}
+
 @media (min-width: 360px) {
     .form {
         width: 328px;

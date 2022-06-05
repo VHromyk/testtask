@@ -103,35 +103,50 @@ const Form = ({ fetchUsers, logger }) => {
             <SectionTitle title="Working with POST request" />
             <form className={style.form} onSubmit={onSubmitForm}>
                 <div className={style.input_container}>
-                    <TextField
-                        type="text"
-                        required
-                        fullWidth
-                        value={name}
-                        id="name"
-                        label="Your name"
-                        variant="outlined"
-                        onChange={(e) => setName(e.target.value)}
-                        error={name.length !== 0 && !errorTextInput}
-                        inputProps={{
-                            minLength: 2,
-                            maxLength: 60,
-                        }}
-                    />
-                    <TextField
-                        required
-                        fullWidth
-                        value={email}
-                        id="email"
-                        label="Your email"
-                        onChange={(e) => setEmail(e.target.value)}
-                        error={email.length !== 0 && !errorEmailInput}
-                        inputProps={{
-                            minLength: 2,
-                            maxLength: 60,
-                            pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$',
-                        }}
-                    />
+                    <div>
+                        <TextField
+                            type="text"
+                            required
+                            fullWidth
+                            value={name}
+                            id="name"
+                            label="Your name"
+                            variant="outlined"
+                            onChange={(e) => setName(e.target.value)}
+                            error={name.length !== 0 && !errorTextInput}
+                            inputProps={{
+                                minLength: 2,
+                                maxLength: 60,
+                            }}
+                        />
+                    </div>
+                        <label htmlFor="name" className={style.input_label}>
+                            {name.length !== 0 && !errorTextInput && (
+                                <span className={style.helper_eror}>error</span>
+                            )}
+                        </label>
+                    <div>
+                        <TextField
+                            required
+                            fullWidth
+                            value={email}
+                            id="email"
+                            label="Your email"
+                            onChange={(e) => setEmail(e.target.value)}
+                            error={email.length !== 0 && !errorEmailInput}
+                            inputProps={{
+                                minLength: 2,
+                                maxLength: 60,
+                                pattern:
+                                    '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$',
+                            }}
+                        />
+                    </div>
+                    <label htmlFor="email" className={style.input_label}>
+                        {email.length !== 0 && !errorEmailInput && (
+                            <span className={style.helper_eror}>error</span>
+                        )}
+                    </label>
                     <div>
                         <TextField
                             required
