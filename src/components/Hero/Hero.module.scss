@@ -28,7 +28,7 @@
  margin-top: 32px;
 }
 
-@media (min-width: 360px) {
+@media (max-width: 767px) {
  .hero_container {
   height: 500px;
  }
@@ -40,6 +40,9 @@
 }
 
 @media (min-width: 768px) {
+  .hero_container {
+  height: 500px;
+ }
  .text_wrapper {
   width: 380px;
   padding-top: 89px;
