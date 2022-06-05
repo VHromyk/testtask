@@ -6,9 +6,8 @@ import ApiService from '../../service/api-service';
 import TokenService from '../../service/token-service';
 import normalizedStr from '../../utils/normalizedStr';
 import RudioButton from '../RadioButton/RadioButton';
-import SuccessLoger from '../SuccessLoger/SuccessLoger';
 
-const Form = ({fetchUsers}) => {
+const Form = ({fetchUsers, logger}) => {
     const [positions, setPositions] = useState([]);
     const [checkedEl, setCheckedEl] = useState(1);
     const [disableBtn, setDisableBtn] = useState(true);
@@ -16,7 +15,7 @@ const Form = ({fetchUsers}) => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [uploadFile, setUploadFile] = useState(null);
-    const [success, setSuccess] = useState(false);
+
 
     useEffect(() => {
         ApiService.getPositions().then((res) =>
@@ -56,14 +55,12 @@ const Form = ({fetchUsers}) => {
         TokenService.set(token);
 
         ApiService.addUsers(dataArray).then(res => {
-            setSuccess(true);
-
             fetchUsers();
 
-            setTimeout(() => setSuccess(false), 5000);
-        })
-            .catch((err) => console.log(err))
-            .finally(clearForm());
+            logger();
+
+        }).catch((err) => console.log(err))
+            .finally(() => clearForm());
     };
 
 
@@ -177,7 +174,6 @@ const Form = ({fetchUsers}) => {
                     />
                 </div>
             </form>
-            {success && <SuccessLoger />}
         </>
     );
 };
