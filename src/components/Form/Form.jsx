@@ -25,8 +25,6 @@ const Form = ({fetchUsers, logger}) => {
           TokenService.getToken().then(
             (res) => TokenService.set(res.data.token)
         );
-
-        
     }, []);
 
     useEffect(() => {
